@@ -6,12 +6,10 @@ import { ADD_TASK, REMOVE_TASK, CHANGE_TASK } from '../constants';
 export interface Task {
     tasks?: Action[];
 }
-
 export interface Action {
     id: string,
     text: string,
 }
-
 interface uActionTypeAdd {
     type: typeof ADD_TASK;
     id: string;
@@ -20,8 +18,6 @@ interface uActionTypeAdd {
 interface uActionTypeRem {
     type: typeof REMOVE_TASK;
     id: string;
-    // selectTaskid?: string | null
-
 }
 interface uActionTypeChange {
     type: typeof CHANGE_TASK;
@@ -29,9 +25,7 @@ interface uActionTypeChange {
     textedit: string
 }
 
-
 export type uAction = uActionTypeAdd | uActionTypeRem | uActionTypeChange
-
 
 let TASKS: Task = load({ namespace: 'todo-list' })
 
@@ -47,7 +41,7 @@ const tasks = (state = initialstate, action: uAction): Action[] => {
             return [
                 ...state,
                 newTask
-            ]
+            ];
         case REMOVE_TASK:
 
             const deleteTask = state.filter((item: any) => {
@@ -55,9 +49,7 @@ const tasks = (state = initialstate, action: uAction): Action[] => {
             })
             return [
                 ...deleteTask
-            ]
-
-
+            ];
         case CHANGE_TASK:
             const { id, textedit } = action
             const updateTask = state.map((el) =>
@@ -65,11 +57,9 @@ const tasks = (state = initialstate, action: uAction): Action[] => {
             )
             return updateTask;
 
-
         default:
             return state;
     }
-
 }
 export default tasks
 

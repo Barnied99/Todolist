@@ -17,7 +17,6 @@ const App = () => {
   const [state, setState] = useState({ taskText: '' })
 
   const tasksList = useAppSelector((store) => store?.tasks || [])
-
   const dispatch = useAppDispatch();
 
   const handleInputchange = (e: string) => {
@@ -31,7 +30,6 @@ const App = () => {
   }
 
   const addTast = (e: FormEvent<HTMLFormElement>) => {
-    // e.preventDefault()
     dispatch(addTastt(uuidv4(),
       state.taskText,
     ));
@@ -41,7 +39,6 @@ const App = () => {
   const updateTask = (selectTaskId: string, newtext: string) => {
     dispatch(changeTask(selectTaskId, newtext))
   }
-
 
   return (
     <div className='App'>
