@@ -10,7 +10,6 @@ import { addTastt, removeTask, changeTask } from '../src/actions/actionCreate'
 import { useAppSelector, useAppDispatch } from './app.ts/hooks';
 import Footer from './components/Footer/Footer';
 
-
 import './App.css';
 
 const App = () => {
