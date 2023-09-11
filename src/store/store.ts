@@ -1,28 +1,27 @@
-import { createStore, compose, applyMiddleware } from 'redux';
-import { save } from 'redux-localstorage-simple'
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit"
+import { save, load } from 'redux-localstorage-simple'
 
-import rootReducer from '../reducer/index';
-
-/* eslint-disable no-underscore-dangle */
-const composeEnhancers =
-    process.env.NODE_ENV !== 'production' &&
-        typeof window === 'object' &&
-        (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-        (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
-/* eslint-enable */
-
-const configureStore = (): any => (
-    createStore(
-        rootReducer,
-        composeEnhancers(
-            applyMiddleware(save({ namespace: 'todo-list' }))),
-
-    )
-);
+import userReducer from './user-slice';
+import changeReducer from './change-taskSlice'
 
 
+const storageConfig = {
+    namespace: 'todo-list',
+    states: [],
+};
+const preloadedState = {};
 
-const store = configureStore();
+const store = configureStore({
+    reducer: {
+        user: userReducer,
+        tasklist: changeReducer
+    },
+    middleware: (getDefaultMiddleware) => [
+        ...getDefaultMiddleware(),
+        save(storageConfig),
+    ],
+    preloadedState: load(storageConfig),
+});
 
 
 export default store;

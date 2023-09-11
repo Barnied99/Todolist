@@ -18,7 +18,6 @@ export interface ToDoItems {
 
 const ToDoItem: React.FC<ToDoItems> = ({ removeTask, el, onUpdate }) => {
     const [value, setValue] = useState(`${el.text}`);
-
     const updateText = (id: string) => {
         onUpdate(id, value)
     }

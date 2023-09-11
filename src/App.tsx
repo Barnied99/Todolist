@@ -5,7 +5,7 @@ import { FormEvent } from 'react';
 import ToDoInput from '/Users/macbook/todo-ts/src/components/todo-input/todo-input';
 import ToDoList from '/Users/macbook/todo-ts/src/components/todo-list/todo-list';
 
-import { addTastt, removeTask, changeTask } from '../src/actions/actionCreate'
+import { changeActions } from '../src/store/change-taskSlice'
 
 import { useAppSelector, useAppDispatch } from './app.ts/hooks';
 import Footer from './components/Footer/Footer';
@@ -16,7 +16,7 @@ import './App.css';
 const App = () => {
   const [state, setState] = useState({ taskText: '' })
 
-  const tasksList = useAppSelector((store) => store?.tasks || [])
+  const tasksList = useAppSelector((store) => store?.tasklist || [])
   const dispatch = useAppDispatch();
 
   const handleInputchange = (e: string) => {
@@ -26,18 +26,20 @@ const App = () => {
   }
 
   const removetask = (id: string) => {
-    dispatch(removeTask(id))
+    dispatch(changeActions.remove({ id }))
   }
 
   const addTast = (e: FormEvent<HTMLFormElement>) => {
-    dispatch(addTastt(uuidv4(),
-      state.taskText,
+    dispatch(changeActions.add({
+      id: uuidv4(),
+      text: state.taskText
+    }
     ));
 
   }
 
   const updateTask = (selectTaskId: string, newtext: string) => {
-    dispatch(changeTask(selectTaskId, newtext))
+    dispatch(changeActions.change({ id: selectTaskId, text: newtext }))
   }
 
   return (
