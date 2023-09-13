@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { load } from 'redux-localstorage-simple';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+// import { load } from 'redux-localstorage-simple';
 
 export interface Task {
     tasks?: Action[];
@@ -9,31 +9,19 @@ export interface Action {
     text: string,
 }
 
-interface uActionTypeAdd {
-    id: string;
-    text: string
+// let TASKS: Task = load({ namespace: 'todo-list' })
+// const initialState = (TASKS && TASKS.tasks) ? TASKS.tasks : []
+
+
+let initialState: Task = {
 }
-interface uActionTypeRem {
-    id: string;
-}
-interface uActionTypeChange {
-    id: string;
-    textedit: string
-}
-
-export type uAction = uActionTypeAdd | uActionTypeRem | uActionTypeChange
-
-let TASKS: Task = load({ namespace: 'todo-list' })
-
-const initialState = (TASKS && TASKS.tasks) ? TASKS.tasks : []
-
 
 const changeSlice = createSlice({
     name: 'tasklist',
-    initialState: initialState,
+    initialState: initialState.tasks || [],
     reducers: {
-        add(state, action) {
-            const newTask = {
+        setadd(state, action: PayloadAction<Action>) {
+            const newTask: Action = {
                 id: action.payload.id,
                 text: action.payload.text
             }
@@ -43,21 +31,16 @@ const changeSlice = createSlice({
             ];
         },
 
-        remove(state, action) {
-            const deleteTask = state.filter((item: any) => {
-                return item.id !== action.payload.id
-            })
-            return [
-                ...deleteTask
-            ];
+        remove(state, action: PayloadAction<string>) {
+            state = state.filter(item => item.id !== action.payload);
         },
 
-        change(state, action) {
-            const { id, textedit } = action.payload
-            const updateTask = state.map((el) =>
-                el.id === id ? { ...el, text: textedit } : el
-            )
-            return updateTask;
+        change(state, action: PayloadAction<Action>) {
+            const { id, text } = action.payload;
+            const taskIndex = state.findIndex(item => item.id === id);
+            if (taskIndex !== -1) {
+                state[taskIndex].text = text;
+            }
         },
     },
 });
@@ -65,3 +48,39 @@ const changeSlice = createSlice({
 export const changeActions = changeSlice.actions;
 
 export default changeSlice.reducer;
+
+
+
+// const changeSlice = createSlice({
+//     name: 'tasklist',
+//     initialState: initialState,
+//     reducers: {
+//         add(state, action: PayloadAction<Action>) {
+//             const newTask = {
+//                 id: action.payload.id,
+//                 text: action.payload.text
+//             }
+//             return [
+//                 ...state,
+//                 newTask
+//             ];
+//         },
+
+//         remove(state, action: PayloadAction<string>) {
+//             const deleteTask = state.filter((item: any) => {
+//                 return item.id !== action.payload
+//             })
+//             return [
+//                 ...deleteTask
+//             ];
+//         },
+
+//         change(state, action: PayloadAction<Action>) {
+//             const { id, text } = action.payload
+//             const updateTask = state.map((el) =>
+//                 el.id === id ? { ...el, text: text } : el
+//             )
+//             return updateTask;
+//         },
+//     },
+// });

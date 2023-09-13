@@ -2,16 +2,13 @@ import React from 'react';
 import { Flex, ScrollArea } from "@mantine/core";
 import { v4 as uuidv4 } from 'uuid';
 
+import { Action } from '../../store/change-taskSlice';
 import ToDoItem from '../todo-item/todo-item';
 
 import './todo-list.css';
 
-type List = {
-    id: string,
-    text: string
-}
 interface ToDoLists {
-    tasksList: List[],
+    tasksList: Action[],
     removeTask: (id: string) => void,
     onUpdate: (id: string, newtext: string) => void
 }

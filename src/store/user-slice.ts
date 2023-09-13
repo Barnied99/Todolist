@@ -12,7 +12,21 @@ const userSlice = createSlice({
             } else {
                 state.email = action.payload;
             }
-        }
+        },
+        signup(state, action) {
+            if (action.payload?.error) {
+                state = initialUserState;
+            } else {
+                state.email = action.payload;
+            }
+        },
+
+        logout(state) {
+            state = initialUserState;
+        },
+        getSavedUser(state, action) {
+            state = action.payload;
+        },
     }
 })
 export const userActions = userSlice.actions

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { IconTrash } from '@tabler/icons-react';
 import { IconEdit } from '@tabler/icons-react';
 
-import { Action } from '../../reducer/task';
+import { Action } from '../../store/change-taskSlice';
 
 import './todo-item.css';
 
