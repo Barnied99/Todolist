@@ -5,7 +5,7 @@ import { FormEvent } from 'react';
 
 import ToDoInput from '../components/todo-input/todo-input';
 import ToDoList from '../components/todo-list/todo-list';
-import { changeActions } from '../store/change-taskSlice'
+import { changeActions } from '../store/slice/change-taskSlice'
 import { useAppSelector, useAppDispatch } from '../app.ts/hooks';
 
 
@@ -14,8 +14,6 @@ const HomePage = () => {
     const [state, setState] = useState({ taskText: '' })
     const tasksList = useAppSelector((store) => store?.tasklist)
     const dispatch = useAppDispatch();
-
-    console.log(tasksList);
 
     const handleInputchange = (e: string) => {
         setState({
@@ -26,7 +24,6 @@ const HomePage = () => {
         dispatch(changeActions.remove(id))
     }
     const addTast = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
         dispatch(changeActions.setadd({
             id: uuidv4(),
             text: state.taskText
@@ -39,7 +36,6 @@ const HomePage = () => {
     const updateTask = (selectTaskId: string, newtext: string) => {
         dispatch(changeActions.change({ id: selectTaskId, text: newtext }))
     }
-
     return (
         <>
             <ToDoInput onClick={addTast} onChange={handleInputchange} />

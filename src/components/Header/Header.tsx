@@ -4,8 +4,8 @@ import classNames from 'classnames';
 
 import { useAppSelector, useAppDispatch } from '../../app.ts/hooks';
 import ThemeContext from '../../store/theme-context';
-import { userActions } from '../../store/user-slice'
-
+import { userActions } from '../../store/slice/user-slice'
+import './Header.css'
 
 export const Header = () => {
 
@@ -29,44 +29,26 @@ export const Header = () => {
     };
 
     return (
-        <header className={headerClasses}>
-            <div className='logo'>
-                <Link to='/'>
-                    <h1>Todolist</h1>
-                    <span>Find your best paper friend here</span>
-                </Link>
-            </div>
-            <nav className='navigation'>
-                <ul>
-                    {!user && (
-                        <>
-                            <li>
-                                <NavLink
-                                    to='/signin'
-                                >
-                                    Sign in
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    to='/signup'
-                                >
-                                    Sign up
-                                </NavLink>
-                            </li>
-                        </>
-                    )}
-                    {user && (
-                        <div>
-                            <NavLink
-                                to='/signin'
-                                onClick={logoutHandler}
-                            >
-                                Log out
-                            </NavLink>
-                        </div>
-                    )}
-                </ul>
+        <header >
+            <nav className='flexheader' >
+                <div className='logo'>
+                    <img src="logos.svg" width={30} height={30} alt='Jobored' />
+                    <div className='logoname'>Todolist</div>
+                </div>
+                <div className='search'>
+                    <Link to="/signin" >
+                        <a href="/signin" className='active' >
+                            Signin
+                        </a>
+                    </Link>
+                </div>
+                <div className='favorites'>
+                    <Link to="/favorites">
+                        <a href="/favorites" className='active'  >
+                            Signup
+                        </a>
+                    </Link>
+                </div>
             </nav>
         </header>
     )

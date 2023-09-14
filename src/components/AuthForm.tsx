@@ -4,7 +4,9 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useValidation from '../app.ts/use-validation';
-import { userActions } from '../store/user-slice';
+import { userActions } from '../store/slice/user-slice';
+
+import '../App.css'
 
 const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
   const dispatch = useDispatch();

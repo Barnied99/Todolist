@@ -1,4 +1,6 @@
+
 const saveUserData = (store: any) => (next: any) => (action: any) => {
+
   switch (action.type) {
     case 'user/logout': {
       const savedStore = localStorage.getItem('store');
@@ -20,11 +22,9 @@ const saveUserData = (store: any) => (next: any) => (action: any) => {
       const savedStore = localStorage.getItem('store');
       const parsedSavedStore = savedStore ? JSON.parse(savedStore) : {};
       const userData = parsedSavedStore[action.payload];
-      const tasklist = JSON.stringify(userData?.tasklist);
 
       if (userData) {
         localStorage.setItem('currentUser', JSON.stringify(userData.user));
-        tasklist && localStorage.setItem('tasklist', tasklist);
       } else {
         alert('We could not find your email. Please, Sign Up.');
 
@@ -71,32 +71,23 @@ const saveUserData = (store: any) => (next: any) => (action: any) => {
   let result = next(action);
 
   switch (action.type) {
-    // case 'history/add': {
-    //   const { history } = store.getState();
-    //   localStorage.setItem('history', JSON.stringify(history));
-    //   break;
-    // }
 
-    // case 'history/deleteAll': {
-    //   localStorage.removeItem('history');
-    //   break;
-    // }
-
-    // case 'favourites/toggleFavourites': {
-    //   const { favourites } = store.getState();
-    //   localStorage.setItem('favourites', JSON.stringify(favourites));
-
-    //   break;
-    // }
-
-    // case 'favourites/deleteAll': {
-    //   localStorage.removeItem('favourites');
-    //   break;
-    // }
     case 'tasklist/setadd': {
       const { tasklist } = store.getState();
       localStorage.setItem('tasklist', JSON.stringify(tasklist));
+      break
+    }
+
+    case 'tasklist/remove': {
+      const { tasklist } = store.getState();
+      localStorage.setItem('tasklist', JSON.stringify(tasklist));
+
       break;
+    }
+    case 'tasklist/change': {
+      const { tasklist } = store.getState()
+      localStorage.setItem('tasklist', JSON.stringify(tasklist));
+      break
     }
 
     default:

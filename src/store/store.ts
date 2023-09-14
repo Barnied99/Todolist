@@ -1,8 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit"
-// import { save, load } from 'redux-localstorage-simple'
 
-import userReducer from './user-slice';
-import changeReducer from './change-taskSlice'
+import userReducer from './slice/user-slice';
+import changeReducer from './slice/change-taskSlice'
 import saveUserData from "./saveUserData";
 import getUserData from "./getUserData";
 
@@ -27,13 +26,4 @@ export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 
 
-// const storageConfig = {
-//     namespace: 'todo-list',
-//     states: [],
-// };
 
-// middleware: (getDefaultMiddleware) => [
-//     ...getDefaultMiddleware(),
-//     save(storageConfig),
-// ],
-// preloadedState: load(storageConfig),

@@ -2,7 +2,7 @@ import React from 'react';
 import { Flex, ScrollArea } from "@mantine/core";
 import { v4 as uuidv4 } from 'uuid';
 
-import { Action } from '../../store/change-taskSlice';
+import { Action } from '../../store/slice/change-taskSlice';
 import ToDoItem from '../todo-item/todo-item';
 
 import './todo-list.css';

@@ -1,0 +1,23 @@
+.card {
+  position: relative;
+  border: 2px solid $color-light-grey;
+  overflow: hidden;
+  .book-image {
+    background-color: $color-light-grey;
+  }
+  .book-description {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    .book-title {
+      color: $color-dark-blue;
+    }
+    .italic {
+      font-style: italic;
+    }
+  }
+  img {
+    object-fit: contain;
+  }
+ 
+}
