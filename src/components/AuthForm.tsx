@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@mantine/core';
 
 import useValidation from '../app.ts/use-validation';
 import { userActions } from '../store/slice/user-slice';
@@ -69,9 +70,13 @@ const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
           {isPasswordInvalid && <span>Password is invalid</span>}
         </div>
         <div className='form__action'>
-          <button className='button' type='submit'>
+          <Button
+            size={'sm'}
+            variant="filled"
+            c="#ACADB9"
+            type='submit'>
             {props.header}
-          </button>
+          </Button>
         </div>
       </form>
     </section>
