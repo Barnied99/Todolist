@@ -2,32 +2,26 @@ import React from 'react';
 import { Flex, ScrollArea } from "@mantine/core";
 import { v4 as uuidv4 } from 'uuid';
 
+import { Action } from '../../store/slice/change-taskSlice';
 import ToDoItem from '../todo-item/todo-item';
 
 import './todo-list.css';
 
-type List = {
-    id: string,
-    text: string
-}
 interface ToDoLists {
-    tasksList: List[],
+    tasksList: Action[],
     removeTask: (id: string) => void,
     onUpdate: (id: string, newtext: string) => void
 }
 
 const ToDoList: React.FC<ToDoLists> = ({ tasksList, removeTask, onUpdate }) => {
-
     return (
+
         <div className='container'>
             <ScrollArea h={800} type="never">
                 <Flex gap="md"
                     direction="column">
-                    {tasksList.map((el) => (
-                        <ToDoItem onUpdate={onUpdate} removeTask={removeTask} key={uuidv4()} el={el} ></ToDoItem>
-
-
-                    ))}
+                    {tasksList.map((el, index) => (
+                        <ToDoItem onUpdate={onUpdate} removeTask={removeTask} index={index} key={uuidv4()} el={el} ></ToDoItem>))}
                 </Flex>
             </ScrollArea>
 

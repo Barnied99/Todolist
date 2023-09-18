@@ -1,11 +1,10 @@
-
 import React from 'react';
 import { Textarea, Button } from '@mantine/core';
 import { useState } from 'react';
 import { IconTrash } from '@tabler/icons-react';
 import { IconEdit } from '@tabler/icons-react';
 
-import { Action } from '../../reducer/task';
+import { Action } from '../../store/slice/change-taskSlice';
 
 import './todo-item.css';
 
@@ -14,11 +13,11 @@ export interface ToDoItems {
     removeTask: (e: string) => void,
     onUpdate: (id: string, text: string) => void,
     el: Action,
+    index: number
 }
 
-const ToDoItem: React.FC<ToDoItems> = ({ removeTask, el, onUpdate }) => {
+const ToDoItem: React.FC<ToDoItems> = ({ removeTask, el, onUpdate, index }) => {
     const [value, setValue] = useState(`${el.text}`);
-
     const updateText = (id: string) => {
         onUpdate(id, value)
     }
@@ -27,6 +26,8 @@ const ToDoItem: React.FC<ToDoItems> = ({ removeTask, el, onUpdate }) => {
         <div className='conteiners0'>
             <div className='container1'>
                 <Textarea
+                    minRows={4}
+                    maxRows={4}
                     className='_todo'
                     variant="unstyled"
                     onChange={(event) => setValue(event.currentTarget.value)}
@@ -52,9 +53,8 @@ const ToDoItem: React.FC<ToDoItems> = ({ removeTask, el, onUpdate }) => {
                         <IconEdit width={20} height={20} />
                     </Button>
                 </div>
-
             </div>
-        </div >
+        </div>
     )
 }
 

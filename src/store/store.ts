@@ -1,31 +1,31 @@
-import { createStore, compose, applyMiddleware } from 'redux';
-import { save } from 'redux-localstorage-simple'
+import { configureStore } from "@reduxjs/toolkit"
+import thunk from "redux-thunk";
+import logger from "redux-logger";
 
-import rootReducer from '../reducer/index';
+import userReducer from './slice/user-slice';
+import changeReducer from './slice/change-taskSlice'
+import saveUserData from "./saveUserData";
+import getUserData from "./getUserData";
 
-/* eslint-disable no-underscore-dangle */
-const composeEnhancers =
-    process.env.NODE_ENV !== 'production' &&
-        typeof window === 'object' &&
-        (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-        (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
-/* eslint-enable */
-
-const configureStore = (): any => (
-    createStore(
-        rootReducer,
-        composeEnhancers(
-            applyMiddleware(save({ namespace: 'todo-list' }))),
-
-    )
-);
+const preloadedState: Record<string, any> =
+    getUserData();
 
 
+const store = configureStore({
+    reducer: {
+        user: userReducer,
+        tasklist: changeReducer
+    },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(saveUserData, logger, thunk),
+    preloadedState: preloadedState,
 
-const store = configureStore();
-
+});
 
 export default store;
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
+
+
+
