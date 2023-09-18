@@ -1,30 +1,23 @@
-import { Blockquote, createStyles, Flex } from '@mantine/core';
+import { Blockquote, Flex } from '@mantine/core';
+import { useContext } from 'react';
+import classNames from 'classnames';
 
-// const useStyles = createStyles(() => ({
-// Footer: {
-//     display: 'flex',
-//     borderRadius: '9px 9px 9px 9px',
-//     flexDirection: 'row',
-//     height: '60px',
-//     background: '#FFFFFF',
-//     marginTop: '10px',
-//     border: '0px solid #EAEBED',
-//     alignItems: 'center',
-// }
+import ThemeContext from '../../store/theme-context';
 
-
-// }
-// ))
-
+import './Footer.css'
 
 const Footer = () => {
+
+    const { theme } = useContext(ThemeContext);
+
+    const footerClasses = classNames('footer', {
+        ocean: theme === 'ocean',
+        violet: theme === 'violet',
+    });
+
     return (
         <Flex
-            direction="row"
-            bg="#FFFFFF"
-            style={{ borderRadius: '9px 9px 9px 9px', marginBottom: '50px' }
-
-            }
+            className={footerClasses}
         >
             <Blockquote cite="– Forrest Gump">
                 Life is like an npm install – you never know what you are going to get.

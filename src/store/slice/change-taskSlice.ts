@@ -8,7 +8,6 @@ export interface Action {
     text: string,
 }
 
-
 let initialState: Task = {
     tasks: []
 }

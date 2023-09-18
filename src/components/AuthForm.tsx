@@ -1,16 +1,16 @@
-import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mantine/core';
 
-import useValidation from '../app.ts/use-validation';
+import useValidation from '../utills/use-validation';
 import { userActions } from '../store/slice/user-slice';
-
+import { useAppDispatch } from '../utills/hooks';
+import { LoginFormPayload } from '../store/slice/user-slice';
 import '../App.css'
 
 const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const {
@@ -36,9 +36,13 @@ const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
     let isFormValid = isEmailValid && isPasswordValid;
 
     if (isFormValid) {
+      const payload: LoginFormPayload = {
+        email: enteredEmail,
+      };
+
       props.type === 'signin'
-        ? dispatch(userActions.login(enteredEmail))
-        : dispatch(userActions.signup(enteredEmail));
+        ? dispatch(userActions.login(payload))
+        : dispatch(userActions.signup(payload));
       navigate(0);
     }
   };

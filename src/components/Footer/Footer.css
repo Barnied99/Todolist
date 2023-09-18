@@ -1,0 +1,19 @@
+.footer {
+    display: flex;
+    border-radius: 9px 9px 9px 9px;
+    flex-direction: row;
+    height: 60px;
+    /* background: #FFFFFF; */
+    margin-top: 10px;
+    border: 0px solid #EAEBED;
+    align-items: center;
+}
+
+
+.footer.ocean {
+    background: #FFFFFF;
+}
+
+.footer.violet {
+    background: #5a189a;
+}

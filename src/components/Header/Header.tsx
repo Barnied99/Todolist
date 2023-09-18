@@ -1,11 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Text, Button, Switch, Group, useMantineTheme } from '@mantine/core';
 import { IconSun, IconMoonStars } from '@tabler/icons-react';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import classNames from 'classnames';
-import { useState } from 'react';
 
-import { useAppSelector, useAppDispatch } from '../../app.ts/hooks';
+import { useAppSelector, useAppDispatch } from '../../utills/hooks';
 import ThemeContext from '../../store/theme-context';
 import { userActions } from '../../store/slice/user-slice'
 import './Header.css'
@@ -17,13 +16,12 @@ export const Header = () => {
     const { theme, changeTheme } = useContext(ThemeContext);
 
     const [checked, setChecked] = useState(false);
-
     const { email: user } = useAppSelector((state: any) => {
         return state.user;
     });
 
 
-    const headerClasses = classNames('header', {
+    const headerClasses = classNames('flexheader', {
         ocean: theme === 'ocean',
         violet: theme === 'violet',
     });
@@ -32,7 +30,6 @@ export const Header = () => {
         dispatch(userActions.logout());
         navigate(0);
     };
-
     const changeThemes = () => {
         checked ? changeTheme('ocean') : changeTheme('violet');
         setChecked(!checked)
@@ -40,8 +37,8 @@ export const Header = () => {
 
 
     return (
-        <header className={headerClasses}>
-            <nav className='flexheader' >
+        <header >
+            <nav className={headerClasses} >
                 <div className='logo'>
                     <img src="logos.svg" width={30} height={30} alt='Jobored' />
                     <Text className='logoname'>TodoList</Text>
@@ -62,7 +59,7 @@ export const Header = () => {
                                     size={'sm'}
                                     variant="subtle"
                                     c="#ACADB9"
-                                    component='a' href="/signin" className='active' >
+                                    className='active' >
                                     Sign in
                                 </Button>
                             </Link>
@@ -73,7 +70,7 @@ export const Header = () => {
                                     size={'sm'}
                                     variant="subtle"
                                     c="#ACADB9"
-                                    component='a' href="/signup" className='active'  >
+                                    className='active'  >
                                     Sign up
                                 </Button>
                             </Link>
@@ -89,7 +86,7 @@ export const Header = () => {
                                     size={'sm'}
                                     variant="subtle"
                                     c="#ACADB9"
-                                    component='a' href="/fav">Info</Button>
+                                >Info</Button>
                             </Link>
                         </div>
                         <div className='switchlogup'>

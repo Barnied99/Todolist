@@ -5,14 +5,11 @@ import { IconSearch } from "@tabler/icons-react";
 import { useRef } from 'react';
 import "../todo-input/todo-input.css"
 import React from 'react';
-// import { FormEvent } from 'react';
 
 interface ToDoInputForm {
     onChange: (e: string) => void,
     onClick: (e: any) => void,
 }
-
-
 
 const ToDoInput: React.FC<ToDoInputForm> = ({ onChange, onClick }) => {
 
@@ -42,8 +39,5 @@ const ToDoInput: React.FC<ToDoInputForm> = ({ onChange, onClick }) => {
         </div>
     )
 }
-
-
-
 
 export default ToDoInput;

@@ -6,13 +6,14 @@ import { FormEvent } from 'react';
 import ToDoInput from '../components/todo-input/todo-input';
 import ToDoList from '../components/todo-list/todo-list';
 import { changeActions } from '../store/slice/change-taskSlice'
-import { useAppSelector, useAppDispatch } from '../app.ts/hooks';
+import { useAppSelector, useAppDispatch } from '../utills/hooks';
+import { RootState } from '../store/store';
 
 
 const HomePage = () => {
 
     const [state, setState] = useState({ taskText: '' })
-    const tasksList = useAppSelector((store) => store?.tasklist)
+    const tasksList = useAppSelector((store: RootState) => store?.tasklist)
     const dispatch = useAppDispatch();
 
     const handleInputchange = (e: string) => {

@@ -14,17 +14,14 @@ interface ToDoLists {
 }
 
 const ToDoList: React.FC<ToDoLists> = ({ tasksList, removeTask, onUpdate }) => {
-
     return (
+
         <div className='container'>
             <ScrollArea h={800} type="never">
                 <Flex gap="md"
                     direction="column">
-                    {tasksList.map((el) => (
-                        <ToDoItem onUpdate={onUpdate} removeTask={removeTask} key={uuidv4()} el={el} ></ToDoItem>
-
-
-                    ))}
+                    {tasksList.map((el, index) => (
+                        <ToDoItem onUpdate={onUpdate} removeTask={removeTask} index={index} key={uuidv4()} el={el} ></ToDoItem>))}
                 </Flex>
             </ScrollArea>
 

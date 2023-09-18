@@ -1,27 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
-export type Props = {
-    children: React.ReactNode;
-};
+import { Props } from '../types/types';
 
-const ThemeContext = React.createContext({
+interface ThemeContextProps {
+    theme: string;
+    changeTheme: (theme: string) => void;
+}
+
+
+const ThemeContext = React.createContext<ThemeContextProps>({
     theme: 'ocean',
-    changeTheme: (theme: string) => { },
+    changeTheme: (theme: string) => { }
 });
 
 export const ThemeProvider: React.FC<Props> = (props) => {
-    const [theme, setTheme] = useState(
-        () => localStorage.getItem('theme') || 'ocean'
+    const [theme, setTheme] = useState<string>(localStorage.getItem("theme") || "ocean"
     );
     const changeTheme = (chosenTheme: string) => {
         if (theme === chosenTheme) {
             return;
         }
-        localStorage.setItem('theme', chosenTheme);
+        localStorage.setItem("theme", chosenTheme);
         setTheme(chosenTheme);
     };
 
-    const contextValue = {
+    const contextValue: ThemeContextProps = {
         theme,
         changeTheme,
     };
@@ -33,4 +36,5 @@ export const ThemeProvider: React.FC<Props> = (props) => {
     );
 };
 
+export const useTheme = (): ThemeContextProps => useContext(ThemeContext);
 export default ThemeContext;

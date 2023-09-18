@@ -1,4 +1,3 @@
-
 const saveUserData = (store: any) => (next: any) => (action: any) => {
 
   switch (action.type) {
@@ -8,10 +7,13 @@ const saveUserData = (store: any) => (next: any) => (action: any) => {
       const userData = store.getState();
       parsedSavedStore[userData.user.email] = {
         user: userData.user,
+        tasklist: userData.tasklist
       };
+
 
       localStorage.setItem('store', JSON.stringify(parsedSavedStore));
       localStorage.removeItem('currentUser');
+      localStorage.removeItem('tasklist');
 
       let result = next(action);
 
@@ -22,9 +24,11 @@ const saveUserData = (store: any) => (next: any) => (action: any) => {
       const savedStore = localStorage.getItem('store');
       const parsedSavedStore = savedStore ? JSON.parse(savedStore) : {};
       const userData = parsedSavedStore[action.payload];
+      const tasklist = JSON.stringify(userData?.tasklist)
 
       if (userData) {
         localStorage.setItem('currentUser', JSON.stringify(userData.user));
+        tasklist && localStorage.setItem('tasklist', tasklist)
       } else {
         alert('We could not find your email. Please, Sign Up.');
 
