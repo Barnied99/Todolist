@@ -7,7 +7,7 @@ import useValidation from '../utills/use-validation';
 import { userActions } from '../store/slice/user-slice';
 import { useAppDispatch } from '../utills/hooks';
 import { LoginFormPayload } from '../store/slice/user-slice';
-import '../App.css'
+// import '../App.css'
 
 const AuthForm: React.FC<{ header: any; type: any }> = (props) => {
   const dispatch = useAppDispatch();

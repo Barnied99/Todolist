@@ -7,6 +7,8 @@
     margin-top: 10px;
     border: 0px solid #EAEBED;
     align-items: center;
+    justify-content: center;
+    width: 600px;
 }
 
 
@@ -23,7 +25,9 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    flex: 1 1 40%;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 40%;
     width: 141px;
     height: 36px;
     padding: 10px;
@@ -44,12 +48,14 @@
     padding: 10px;
     font-weight: bold;
     font-size: 24px;
-    flex: 1 1 20%;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 20%;
 }
 
 .switchlogin {
     display: flex;
-    flex: 0.1 1 5%;
+    flex: 0 1 5%;
 }
 
 @media (max-width:750px) {
@@ -61,7 +67,7 @@
 
 .switchlogup {
     display: flex;
-    flex: 0.4 1 5%;
+    flex: 0 1 5%;
 }
 
 @media (max-width:750px) {

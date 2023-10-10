@@ -1,10 +1,11 @@
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import AuthForm from '../components/AuthForm';
 import { RootState } from '../store/store';
 
-const SignIn = () => {
+export const SignIn = () => {
   const { email: user } = useSelector((state: RootState) => state.user);
 
   if (user) {
@@ -16,4 +17,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default React.memo(SignIn);

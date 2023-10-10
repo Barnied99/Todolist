@@ -1,10 +1,11 @@
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import AuthForm from '../components/AuthForm';
 import { RootState } from '../store/store';
 
-const SignUp = () => {
+export const SignUp = () => {
   const { email: user } = useSelector((state: RootState) => state.user);
 
   if (user) {
@@ -14,4 +15,4 @@ const SignUp = () => {
   return <AuthForm header='Sign Up' type='signup' />;
 };
 
-export default SignUp;
+export default React.memo(SignUp);
