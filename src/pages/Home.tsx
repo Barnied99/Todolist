@@ -15,7 +15,6 @@ const HomePage = () => {
     const [state, setState] = useState({ taskText: '' })
     const tasksList = useAppSelector((store: RootState) => store?.tasklist)
     const dispatch = useAppDispatch();
-
     const handleInputchange = (e: string) => {
         setState({
             taskText: e,

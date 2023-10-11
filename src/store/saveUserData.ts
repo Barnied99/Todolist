@@ -6,7 +6,7 @@ const saveUserData = (store: any) => (next: any) => (action: any) => {
       const parsedSavedStore = savedStore ? JSON.parse(savedStore) : {};
       const userData = store.getState();
       parsedSavedStore[userData.user.email] = {
-        user: userData.user,
+        user: userData.user.email,
         tasklist: userData.tasklist
       };
 
@@ -23,7 +23,7 @@ const saveUserData = (store: any) => (next: any) => (action: any) => {
     case 'user/login': {
       const savedStore = localStorage.getItem('store');
       const parsedSavedStore = savedStore ? JSON.parse(savedStore) : {};
-      const userData = parsedSavedStore[action.payload];
+      const userData = parsedSavedStore[action.payload.email];
       const tasklist = JSON.stringify(userData?.tasklist)
 
       if (userData) {
@@ -47,7 +47,7 @@ const saveUserData = (store: any) => (next: any) => (action: any) => {
     case 'user/signup': {
       const savedStore = localStorage.getItem('store');
       const parsedSavedStore = savedStore ? JSON.parse(savedStore) : {};
-      const userData = parsedSavedStore[action.payload];
+      const userData = parsedSavedStore[action.payload.email];
 
       if (userData) {
         alert('This email already exists. Please, Sign In.');
@@ -61,8 +61,8 @@ const saveUserData = (store: any) => (next: any) => (action: any) => {
 
         return result;
       } else {
-        localStorage.setItem('currentUser', JSON.stringify(action.payload));
-        parsedSavedStore[action.payload] = { user: { email: action.payload } };
+        localStorage.setItem('currentUser', JSON.stringify(action.payload.email));
+        parsedSavedStore[action.payload.email] = { user: { email: action.payload.email } };
         localStorage.setItem('store', JSON.stringify(parsedSavedStore));
       }
 
